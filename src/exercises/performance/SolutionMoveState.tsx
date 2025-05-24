@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Example1, Example2 } from "./ProblemMoveState"
+import React from "react"
 
 export const SolutionMoveState = () => {
     return (

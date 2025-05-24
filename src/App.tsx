@@ -1,19 +1,20 @@
 import './App.css'
-import { TestMemo } from './exercises/MemoExercise'
-
+import Todo from './exercises/todo/ToDo'
+import React, { useContext, useState } from 'react'
+import { ContextProvider, DataContext } from './exercises/todo/context/DataContext'
+import { Provider } from 'react-redux'
+import { store } from './exercises/redux/store'
 function App() {
   return (
     <>
-     {
-    // <ProblemMoveState />
- // <SolutionMoveState />
-    // <ProblemCompChildren />
-    //<ProblemCompProps/>
+      <Provider store={store}>
+        <ContextProvider>
+          <Todo />
+        </ContextProvider>
+      </Provider>
 
-     } 
-     <TestMemo />
     </>
+
   )
 }
-
 export default App

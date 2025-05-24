@@ -1,10 +1,12 @@
-import { useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
+import { DataContext } from "../todo/context/DataContext";
 
 export const ProblemMoveState = () => {
-    const [change, SetChange] = useState(false)
+    const [change, SetChange] = useState(false);
+    const { selectedList, setSelectedList} = useContext(DataContext);
+
     return (
         <>
-            <button onClick={() => SetChange(!change)}>State Change {change ? 'Yes' : 'No'}</button>
             <Example1 />
             <Example2 />
         </>
@@ -12,8 +14,11 @@ export const ProblemMoveState = () => {
 }
 
 export const Example1 = () => {
+    const { selectedList, setSelectedList} = useContext(DataContext);
+
     console.log('Example1!')
     return <>
+            <button onClick={() => setSelectedList(Math.random()*100)}>State Change {selectedList ? 'Yes' : 'No'}{selectedList}</button>
       <p> Hello Example1!</p> 
     </>
 }
