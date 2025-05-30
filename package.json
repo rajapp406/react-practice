@@ -10,16 +10,28 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/react": "^3.19.1",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^7.1.0",
+    "@mui/x-charts": "^8.4.0",
+    "@react-router/node": "^7.5.3",
+    "@react-router/serve": "^7.5.3",
     "@reduxjs/toolkit": "^2.8.2",
+    "@tailwindcss/vite": "^4.1.7",
+    "isbot": "^5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-redux": "^9.2.0",
+    "react-router": "^7.5.3",
     "redux-thunk": "^3.1.0",
     "styled-components": "^6.1.18",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
+    "@react-router/dev": "^7.6.1",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",

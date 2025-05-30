@@ -1,8 +1,8 @@
 import TaskList from "./TaskLIst";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../redux/store";
+import { AppDispatch, RootState } from "../../../../redux/store";
 import { useEffect } from "react";
-import { searchTodoByTaskThunk } from "../../../redux/thunks/searchThunk";
+import { searchTodoByTaskThunk } from "../../../../redux/thunks/searchThunk";
 import { TaskFilters } from "../../model/taskData";
 import React from "react";
 import { createSelector } from "@reduxjs/toolkit";
@@ -10,10 +10,12 @@ const filterTodo = createSelector(
     (state: RootState) => state.todoFilter,
     (state: RootState) => state.todoSearch,
     (filter, search) =>{
-        console.log(search, filter);
+        console.log(search, filter, '----');
         const filterQuery = filter.filter;
         const searchQuery = search.searchQuery;
-        //search.data
+        if(searchQuery === TaskFilters.All){
+            return search.data;
+        }
         const finalData = search.data.filter((e, i) => filter.data.findIndex(v => v.id === e.id) !== -1 )
         return finalData as any;
     }
@@ -24,7 +26,6 @@ export function Tasktable() {
     const dispatch: AppDispatch = useDispatch();
     useEffect(() => {
         console.log(data)
-       // dispatch(searchTodoByTaskThunk(TaskFilters.All));
      }, [data])
     return (
         <>

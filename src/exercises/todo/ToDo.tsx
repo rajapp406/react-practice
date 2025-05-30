@@ -2,20 +2,20 @@ import TodoForm from "./components/todoform/TodoForm";
 import { useContext, useEffect } from "react";
 import { TaskFilters } from "./model/taskData";
 import localService from './services/localStorageService'
-import { Button } from "./elements/Button";
 import { DataContext } from "./context/DataContext";
 import { Tasktable } from "./components/tasktable/TaskTable";
 import Search from "./components/search/SearchTask";
 import Filters from "./components/Filters";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../redux/store";
-import { searchTodoByTaskThunk } from "../redux/thunks/searchThunk";
-import { deleteTodoByTaskThunk } from "../redux/thunks/deleteThunk";
-import { completeTodoByTaskThunk } from "../redux/thunks/completeThunk";
+import { AppDispatch, RootState } from "../../redux/store";
+import { searchTodoByTaskThunk } from "../../redux/thunks/searchThunk";
+import { deleteTodoByTaskThunk } from "../../redux/thunks/deleteThunk";
+import { completeTodoByTaskThunk } from "../../redux/thunks/completeThunk";
 import React from "react";
-import { createTodoByTaskThunk } from "../redux/thunks/createThunk";
-import { filterTodoByTaskThunk } from "../redux/thunks/filterThunk";
-import { createSelector } from "reselect";
+import { createTodoByTaskThunk } from "../../redux/thunks/createThunk";
+import { filterTodoByTaskThunk } from "../../redux/thunks/filterThunk";
+import { TButton } from "../../elements/Button";
+import { TaskDetailsContainer } from "./components/taskdetails/TaskDetailsContainer";
 
 
 export default function Todo() {
@@ -46,14 +46,18 @@ export default function Todo() {
         setSelectedList([]);
     }
 
+    useEffect(()=>{
+        dispatch(searchTodoByTaskThunk(TaskFilters.All));
+    },[])
     return (
         <>
             <TodoForm onSubmit={onSave} />
             <Filters onChange={onChange} selected={TaskFilters.Active} />
             <Search onSearch={onSearch} />
-            <Button onClick={onDelete}>Delete</Button>
-            <Button onClick={onComplete}>Complete</Button>
+            <TButton onClick={onDelete}>Delete</TButton>
+            <TButton onClick={onComplete}>Complete</TButton>
             <Tasktable />
+            <TaskDetailsContainer/>
         </>
 
 

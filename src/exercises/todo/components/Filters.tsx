@@ -1,8 +1,6 @@
 import React from "react"
 import { TaskFilters } from "../model/taskData"
-import { useDispatch, useSelector } from "react-redux"
-import { filter } from "../../redux/slices/todoFilterSlice"
-import { RootState } from "../../redux/store";
+import TSelect from "../../../elements/Select";
 
 /**
  * dropdown with All, Active
@@ -11,15 +9,11 @@ import { RootState } from "../../redux/store";
 export default function Filters({onChange, selected =  TaskFilters.Active}: {onChange: (e: string) => void, selected: TaskFilters}) {
     return (
         <>
-            <select onChange={(e)=> {
+            <TSelect onChange={(e: any)=> {
                 return onChange(e.target.value)
-            }} defaultValue={TaskFilters.Active}>
-                {
-                    Object.keys(TaskFilters).map((v, i) => {
-                        return <option key={i} selected={TaskFilters[v] === selected} value={TaskFilters[v]}>{v}</option>
-                    })
-                }
-            </select>
+            }} value={TaskFilters.All}  defaultValue={TaskFilters.All} options={Object.keys(TaskFilters)}>
+          
+            </TSelect>
         </>
     )
 }

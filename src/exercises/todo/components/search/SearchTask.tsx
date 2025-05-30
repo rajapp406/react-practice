@@ -1,11 +1,12 @@
 import React from "react";
 import { SearchInfo } from "../../model/SearchInfo";
+import { InputBox } from "../../../../elements/Input";
 
 export default function Search({ onSearch }: SearchInfo) {
     console.log('search')
     return (
         <>
-            <input type="text" name="search" id="search" onInput={(e: any) =>{
+            <InputBox type="text" name="search" id="search" onInput={(e: any) =>{
                 return onSearch(e.target.value)
             } 
             } />

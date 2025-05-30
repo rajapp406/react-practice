@@ -3,7 +3,6 @@ import filterReducer from './slices/todoFilterSlice'
 import searchReducer from './slices/todoSearchSlice';
 import crudReducer from './slices/todoDataSlice'
 import deleteReducer from './slices/deleteTodoSlice'
-import { useDispatch } from 'react-redux';
 
 
 type Comb = ReturnType<typeof combineSlices>

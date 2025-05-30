@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
-import { create } from '../../../redux/slices/todoDataSlice';
+import { RootState } from '../../../../redux/store';
+import { create } from '../../../../redux/slices/todoDataSlice';
+import { TButton } from '../../../../elements/Button';
+import { InputBox } from '../../../../elements/Input';
 interface FormData {
     task: string
 }
@@ -20,8 +22,8 @@ export default function TodoForm({ data = {} as FormData, onSubmit }: { data?: F
     return (
         <>
             <div>
-                <input type='text' name='task' value={formData.task} onInput={(e: any) => setFormData({ ...formData, task: e.target.value })} />
-                <button onClick={onClick}>Submit</button>
+                <InputBox type='text' name='task' value={formData.task} onInput={(e: any) => setFormData({ ...formData, task: e.target.value })} />
+                <TButton onClick={onClick}>Submit</TButton>
             </div>
 
         </>

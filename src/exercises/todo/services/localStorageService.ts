@@ -7,6 +7,11 @@ function LocalStorageService() {
         const dat = [...data, { ...item, status: 'active', id: uuidv4() }];
         localStorage.setItem('data', JSON.stringify(dat));
     }
+    const registerUser = (item: TaskData) => {
+        const data = findUsers();
+        const dat = [...data, { ...item, status: 'active', id: uuidv4() }];
+        localStorage.setItem('users', JSON.stringify(dat));
+    }
     const updateItem = (item: TaskData, id: string) => {
         const data = findAll();
         let element = data.find(item => item.id === id);
@@ -16,8 +21,8 @@ function LocalStorageService() {
     const deleteItems = (ids: string[]) => {
         const data = findAll();
         data.forEach(item => {
-            if(ids.includes(item.id)){
-                item.status = TaskFilters.Deleted 
+            if (ids.includes(item.id)) {
+                item.status = TaskFilters.Deleted
             }
         });
         localStorage.setItem('data', JSON.stringify(data));
@@ -25,8 +30,8 @@ function LocalStorageService() {
     const completeItems = (ids: string[]) => {
         const data = findAll();
         data.forEach(item => {
-            if(ids.includes(item.id)){
-                item.status = TaskFilters.Completed 
+            if (ids.includes(item.id)) {
+                item.status = TaskFilters.Completed
             }
         });
         localStorage.setItem('data', JSON.stringify(data));
@@ -37,7 +42,7 @@ function LocalStorageService() {
     }
     const findItemByStatus = (status: string): TaskData[] => {
         const data = findAll();
-        if(status === TaskFilters.All){
+        if (status === TaskFilters.All) {
             return data;
         }
         console.log(data.filter(item => item.status === status), '-------')
@@ -45,14 +50,16 @@ function LocalStorageService() {
     }
     const findItemsByTask = (task: string): TaskData[] => {
         const data = findAll();
-        if(task === TaskFilters.All) return data;
+        if (task === TaskFilters.All) return data;
         return data.filter(item => item.task && item.task.includes(task));
     }
     const findAll = () => {
         return JSON.parse(localStorage.getItem('data') || '[]') as TaskData[]
     }
 
-
+    const findUsers = () => {
+        return JSON.parse(localStorage.getItem('users') || '[]') as TaskData[]
+    }
 
     const findActiveItems = (): TaskData[] => {
         const data = findAll();
@@ -62,7 +69,7 @@ function LocalStorageService() {
         const data = findAll();
         return data.filter(item => item.status === TaskFilters.Deleted);
     }
-    const findCompletedItems = (data:TaskData[]): TaskData[] => {
+    const findCompletedItems = (data: TaskData[]): TaskData[] => {
         return data.filter(item => item.status === TaskFilters.Completed);
     }
     return {
@@ -77,6 +84,7 @@ function LocalStorageService() {
         findDeletedItems,
         findActiveItems,
         completeItems,
+        registerUser
     }
 
 }
