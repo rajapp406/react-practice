@@ -7,6 +7,7 @@
     position: fixed;
     top: 0;
     left: 0;
+    background-color: brown;
 }
 .nav-link li.nav-item{
   margin: 5px;
@@ -15,13 +16,41 @@
 .sidebar{
     width: var(--var-sidebar-width);
     padding-top: var(--todo-padding-top);
-    border-right-color: aliceblue;
+    border-right-color: aliceblue !important;
+    height: 90vh;
+    background-color: blueviolet;
+
+}
+.sidebar li{
+    list-style: none;
+    text-align: left;
+    background-color: blueviolet;
 }
 .main-container{
     padding-top: var(--todo-padding-top);
     width: 1100px;
+    display: flex;
+    background-color: aquamarine;
 }
 .main-container button{
     margin: 0 5px;
     height: 40px;
+}
+.footer{
+    background-color: darkmagenta;
+}
+.footer ul{
+    display: flex;
+}
+.footer li{
+    list-style: none;
+    text-align: left;
+    margin: 0 5px;
+}
+.content{
+    flex-grow: 1;
+    background-color: chartreuse;
+}
+.rightsidebar{
+    background-color: red;
 }

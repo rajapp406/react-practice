@@ -1,17 +1,16 @@
-import { left } from "@popperjs/core"
 import React from "react"
-import { NavLink, Outlet } from "react-router"
 import './sidebar.css'
 import { THeader } from "./Header"
 import { TSideBar } from "./Sidebar"
 import { TFooter } from "./Footer"
 import { TMain } from "./Main"
+import { RightSidebar } from "./RightSidebar"
 
 export function TodoLayout() {
     return (
         <>
             <THeader />
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', height: '90vh' }}>
                 <TSideBar />
                 <TMain />
             </div>
