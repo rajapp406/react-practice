@@ -12,3 +12,9 @@ export enum TaskFilters {
     Deleted = 'deleted'
 
 }
+
+export enum ActionTodo {
+    Complete = 'complete',
+    Delete = 'delete'
+
+}

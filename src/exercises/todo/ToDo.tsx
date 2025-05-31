@@ -1,7 +1,6 @@
 import TodoForm from "./components/todoform/TodoForm";
 import { useContext, useEffect } from "react";
-import { TaskFilters } from "./model/taskData";
-import localService from './services/localStorageService'
+import { ActionTodo, TaskFilters } from "./model/taskData";
 import { DataContext } from "./context/DataContext";
 import { Tasktable } from "./components/tasktable/TaskTable";
 import Search from "./components/search/SearchTask";
@@ -16,6 +15,9 @@ import { createTodoByTaskThunk } from "../../redux/thunks/createThunk";
 import { filterTodoByTaskThunk } from "../../redux/thunks/filterThunk";
 import { TButton } from "../../elements/Button";
 import { TaskDetailsContainer } from "./components/taskdetails/TaskDetailsContainer";
+import { getAllTodosByThunk } from "../../redux/thunks/allTodosThunk";
+import TSelect from "../../elements/Select";
+import { getOptionsFromEnum } from "../../util/common.util";
 
 
 export default function Todo() {
@@ -28,7 +30,13 @@ export default function Todo() {
         dispatch(searchTodoByTaskThunk(TaskFilters.All));
     }
     const onChange = async (status: string) => {
+        console.log(status, '-------')
       await dispatch(filterTodoByTaskThunk(status))
+
+    }
+    const onAction = async (status: string) => {
+        console.log(status, '-------')
+      await dispatch(deleteTodoByTaskThunk(status))
 
     }
     const onSearch = async (str: string) => {
@@ -45,19 +53,25 @@ export default function Todo() {
         dispatch(searchTodoByTaskThunk(TaskFilters.All));
         setSelectedList([]);
     }
-
     useEffect(()=>{
-        dispatch(searchTodoByTaskThunk(TaskFilters.All));
-    },[])
+        dispatch(getAllTodosByThunk(''));
+        console.log('......', 'allTodos')
+    
+      },[])
     return (
         <>
-            <TodoForm onSubmit={onSave} />
-            <Filters onChange={onChange} selected={TaskFilters.Active} />
+        <div>
+        <TodoForm onSubmit={onSave} />
+        <div style={{display: 'flex'}}>
+        <Filters onChange={onChange} />
             <Search onSearch={onSearch} />
-            <TButton onClick={onDelete}>Delete</TButton>
-            <TButton onClick={onComplete}>Complete</TButton>
+            <TSelect label="Action" onChange={onAction} options={getOptionsFromEnum(ActionTodo)} />
+        </div>
+
             <Tasktable />
             <TaskDetailsContainer/>
+        </div>
+
         </>
 
 

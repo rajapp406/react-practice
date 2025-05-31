@@ -6,7 +6,7 @@ export default function Search({ onSearch }: SearchInfo) {
     console.log('search')
     return (
         <>
-            <InputBox type="text" name="search" id="search" onInput={(e: any) =>{
+            <InputBox label="Search" type="text" name="search" id="search" onInput={(e: any) =>{
                 return onSearch(e.target.value)
             } 
             } />

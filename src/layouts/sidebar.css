@@ -1,0 +1,27 @@
+:root{
+    --var-sidebar-width: 300px;
+    --todo-padding-top: 60px;
+}
+.nav-link{
+    width: 1800px;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.nav-link li.nav-item{
+  margin: 5px;
+}
+
+.sidebar{
+    width: var(--var-sidebar-width);
+    padding-top: var(--todo-padding-top);
+    border-right-color: aliceblue;
+}
+.main-container{
+    padding-top: var(--todo-padding-top);
+    width: 1100px;
+}
+.main-container button{
+    margin: 0 5px;
+    height: 40px;
+}

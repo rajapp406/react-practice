@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { searchTodoByTaskThunk } from "../thunks/searchThunk";
+import { getAllTodosByThunk } from "../thunks/allTodosThunk";
 
 const searchSlice = createSlice({
     name: 'todoSearch',
@@ -34,6 +35,28 @@ const searchSlice = createSlice({
             }
         ).addCase(
             searchTodoByTaskThunk.rejected,
+            (state, action) => {
+                console.log(state, action), 'rejected';
+                state.error = action.error as any
+                return
+            }
+        ).addCase(
+            getAllTodosByThunk.pending,
+            (state, action) => {
+                console.log(state, action, 'pending');
+                return
+            }
+        )
+        .addCase(
+            getAllTodosByThunk.fulfilled,
+            (state, action) => {
+                console.log(state, action), 'fulfilled';
+                state.data = [...action.payload] as any
+                state.searchQuery = action.meta.arg;
+                return
+            }
+        ).addCase(
+            getAllTodosByThunk.rejected,
             (state, action) => {
                 console.log(state, action), 'rejected';
                 state.error = action.error as any

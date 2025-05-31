@@ -21,8 +21,8 @@ export default function TodoForm({ data = {} as FormData, onSubmit }: { data?: F
     })
     return (
         <>
-            <div>
-                <InputBox type='text' name='task' value={formData.task} onInput={(e: any) => setFormData({ ...formData, task: e.target.value })} />
+            <div style={{display: 'flex'}}>
+                <InputBox type='text' name='task' label="Task" value={formData.task} onInput={(e: any) => setFormData({ ...formData, task: e.target.value })} />
                 <TButton onClick={onClick}>Submit</TButton>
             </div>
 

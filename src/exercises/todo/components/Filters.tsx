@@ -1,17 +1,19 @@
-import React from "react"
+import React, { useState } from "react"
 import { TaskFilters } from "../model/taskData"
 import TSelect from "../../../elements/Select";
+import { getOptionsFromEnum } from "../../../util/common.util";
 
 /**
  * dropdown with All, Active
  * @returns 
  */
-export default function Filters({onChange, selected =  TaskFilters.Active}: {onChange: (e: string) => void, selected: TaskFilters}) {
+export default function Filters({onChange, selected =  Object.keys(TaskFilters)[1]}: {onChange: (e: string) => void, selected?: string}) {
     return (
         <>
-            <TSelect onChange={(e: any)=> {
+            <TSelect label="Filter" onChange={(e: any)=> {
+                console.log(e.target.value)
                 return onChange(e.target.value)
-            }} value={TaskFilters.All}  defaultValue={TaskFilters.All} options={Object.keys(TaskFilters)}>
+            }}  defaultValue={TaskFilters.All} options={getOptionsFromEnum(TaskFilters)}>
           
             </TSelect>
         </>

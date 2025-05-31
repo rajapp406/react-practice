@@ -2,10 +2,11 @@ import TaskList from "./TaskLIst";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../../redux/store";
 import { useEffect } from "react";
-import { searchTodoByTaskThunk } from "../../../../redux/thunks/searchThunk";
 import { TaskFilters } from "../../model/taskData";
 import React from "react";
 import { createSelector } from "@reduxjs/toolkit";
+import { swapArray } from "../../../../util/common.util";
+
 const filterTodo = createSelector(
     (state: RootState) => state.todoFilter,
     (state: RootState) => state.todoSearch,
@@ -13,10 +14,17 @@ const filterTodo = createSelector(
         console.log(search, filter, '----');
         const filterQuery = filter.filter;
         const searchQuery = search.searchQuery;
-        if(searchQuery === TaskFilters.All){
+        if(filterQuery === TaskFilters.All){
+            return filter.data;
+        }
+        if(search.data.length === 0){
+            return filter.data;
+        }
+        if(filter.data.length === 0){
             return search.data;
         }
-        const finalData = search.data.filter((e, i) => filter.data.findIndex(v => v.id === e.id) !== -1 )
+        const finalObj = swapArray(search.data, filter.data);
+        const finalData = finalObj.big.filter((e, i) => finalObj.small.findIndex(v => v.id === e.id) !== -1 )
         return finalData as any;
     }
 

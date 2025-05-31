@@ -1,15 +1,20 @@
-import { MenuItem, Select } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import React from "react";
 
 function TSelect(props: any){
-    return ( <Select
+  console.log(props.options)
+    return ( 
+      <FormControl fullWidth>
+      <InputLabel id="demo-simple-select-label">{props.label}</InputLabel>
+      <Select
     {...props}
   >
      { props.options.map((v, i) => {
-            return <MenuItem key={i} value={v}>{v}</MenuItem>
+            return <MenuItem key={i} value={v.key}>{v.label}</MenuItem>
         })
     }
   </Select>
+  </FormControl>
     )
 }
 export default TSelect;
