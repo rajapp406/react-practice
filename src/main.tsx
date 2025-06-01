@@ -8,7 +8,7 @@ import React from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router';
 import { TodoLayout } from './layouts/TodoLayout.tsx';
 import { Users } from './exercises/users/Users.tsx';
-import { Tictactoe } from './exercises/tictactoe/Tictactoe.tsx';
+import { Tictactoe } from './exercises/tictactoe/index.ts';
 import { AIchat } from './exercises/aichat/AIchat.tsx';
 import { Dashboard } from './exercises/dashboard/Dashboard.tsx';
 import { Budget } from './exercises/budget/Budget.tsx';

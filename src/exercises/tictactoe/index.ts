@@ -1,0 +1,1 @@
+export { Tictactoe } from './Ticktactoe';

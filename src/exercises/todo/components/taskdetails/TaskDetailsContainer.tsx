@@ -15,7 +15,7 @@ export function TaskDetailsContainer() {
     <TContainer>
              { 
                 Object.values(TaskFilters).filter(v => v !== TaskFilters.All).map(b => {
-                    return <TaskDetails data={{status: b, count: data[b]}} />
+                    return <TaskDetails data={{status: b, count: data[b] || 0}} />
                 })
              }  
     </TContainer>
