@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { promisify } from "../../util/common.util";
-import localStorageService from "../../exercises/todo/services/localStorageService";
+import { promisify } from "../../../util/common.util";
+import localStorageService from "../../../exercises/todo/services/localStorageService";
 
 
 export const createTodoByTaskThunk = createAsyncThunk(

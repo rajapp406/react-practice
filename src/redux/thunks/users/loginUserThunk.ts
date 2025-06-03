@@ -1,14 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { promisify } from "../../util/common.util";
-import localStorageService from "../../exercises/todo/services/localStorageService";
+import { promisify } from "../../../util/common.util";
+import localStorageService from "../../../exercises/todo/services/localStorageService";
 
 
-export const registerUserThunk = createAsyncThunk(
-    'todo/register',
+export const loginUserThunk = createAsyncThunk(
+    'user/login',
     async (data: any, thunkAPI) => {
         console.log('......')
         //dispatch(removeTodo('b7154c30-fc0f-40cc-ba64-076ced21ca63'))
-        const h: any = await promisify(localStorageService.registerUser);
+        const h: any = await promisify(localStorageService.findUser);
         return await h(data);
     },
     {
