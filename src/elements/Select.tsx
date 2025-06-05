@@ -2,7 +2,6 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import React from "react";
 
 function TSelect(props: any){
-  console.log(props.options)
     return ( 
       <FormControl fullWidth>
       <InputLabel id="demo-simple-select-label">{props.label}</InputLabel>

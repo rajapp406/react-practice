@@ -1,10 +1,9 @@
 import React from "react"
-import './sidebar.css'
+import './sidebar.scss'
 import { THeader } from "./Header"
 import { TSideBar } from "./Sidebar"
 import { TFooter } from "./Footer"
 import { TMain } from "./Main"
-import { RightSidebar } from "./RightSidebar"
 
 export function TodoLayout() {
     return (

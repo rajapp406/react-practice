@@ -1,5 +1,5 @@
 import {createSlice } from '@reduxjs/toolkit';
-import { Users } from '../../../exercises/users/models/users';
+import { Users } from '../../../models/users';
 import { updateUserThunk } from '../../thunks/users/updateUserThunk';
 
 const updateUserSlice = createSlice({
@@ -7,7 +7,6 @@ const updateUserSlice = createSlice({
     initialState: {error: null, data: [] as Users[], filter: ''} as any,
     reducers: {
         filter: (state, payload) =>{
-            console.log(state, payload);
             return {...state, ...payload}
         }
     },
@@ -15,7 +14,6 @@ const updateUserSlice = createSlice({
         builder.addCase(
             updateUserThunk.pending,
             (state, action) => {
-                console.log(state, action, 'pending');
                 return
             }
         )

@@ -1,93 +1,95 @@
-import { TaskData, TaskFilters } from "../model/taskData"
-import { v4 as uuidv4 } from 'uuid';
+import { TaskData, TaskFilters } from "../model/taskData";
+import { v4 as uuidv4 } from "uuid";
+import { TodoService } from "../../../models/todoServiceModel";
+import userService from "./userService";
 
-function LocalStorageService() {
-    const saveItem = (item: TaskData) => {
-        const data = findAll();
-        const dat = [...data, { ...item, status: 'active', id: uuidv4() }];
-        localStorage.setItem('data', JSON.stringify(dat));
-    }
-    const registerUser = (item: TaskData) => {
-        const data = findUsers();
-        const dat = [...data, { ...item, status: 'active', id: uuidv4() }];
-        localStorage.setItem('users', JSON.stringify(dat));
-    }
-    const updateItem = (item: TaskData, id: string) => {
-        const data = findAll();
-        let element = data.find(item => item.id === id);
-        element = { ...item, id }
-        localStorage.setItem('data', JSON.stringify([...data, element]));
-    }
-    const deleteItems = (ids: string[]) => {
-        const data = findAll();
-        data.forEach(item => {
-            if (ids.includes(item.id)) {
-                item.status = TaskFilters.Deleted
-            }
-        });
-        localStorage.setItem('data', JSON.stringify(data));
-    }
-    const completeItems = (ids: string[]) => {
-        const data = findAll();
-        data.forEach(item => {
-            if (ids.includes(item.id)) {
-                item.status = TaskFilters.Completed
-            }
-        });
-        localStorage.setItem('data', JSON.stringify(data));
-    }
-    const findItemById = (id: string): TaskData[] => {
-        const data = findAll();
-        return data.filter(item => item.id !== id);
-    }
-    const findItemByStatus = (status: string): TaskData[] => {
-        const data = findAll();
-        if (status === TaskFilters.All) {
-            return data;
-        }
-        console.log(data.filter(item => item.status === status), '-------')
-        return data.filter(item => item.status === status);
-    }
-    const findItemsByTask = (task: string): TaskData[] => {
-        const data = findAll();
-        if (task === TaskFilters.All) return data;
-        return data.filter(item => item.task && item.task.includes(task));
-    }
-    const findAll = () => {
-        return JSON.parse(localStorage.getItem('data') || '[]') as TaskData[]
+
+class LocalStorageService implements TodoService {
+    private static STORAGE_KEY = "data";
+
+    // Helper to get all tasks from localStorage
+    private static getAllTasks(): TaskData[] {
+        return JSON.parse(localStorage.getItem(LocalStorageService.STORAGE_KEY) || "[]");
     }
 
-    const findUsers = () => {
-        return JSON.parse(localStorage.getItem('users') || '[]') as TaskData[]
+    // Helper to save tasks to localStorage
+    private static saveTasks(data: TaskData[]): void {
+        localStorage.setItem(LocalStorageService.STORAGE_KEY, JSON.stringify(data));
     }
 
-    const findActiveItems = (): TaskData[] => {
-        const data = findAll();
-        return data.filter(item => item.status === TaskFilters.Active);
-    }
-    const findDeletedItems = (): TaskData[] => {
-        const data = findAll();
-        return data.filter(item => item.status === TaskFilters.Deleted);
-    }
-    const findCompletedItems = (data: TaskData[]): TaskData[] => {
-        return data.filter(item => item.status === TaskFilters.Completed);
-    }
-    return {
-        saveItem,
-        updateItem,
-        deleteItems,
-        findItemById,
-        findItemByStatus,
-        findItemsByTask,
-        findAll,
-        findCompletedItems,
-        findDeletedItems,
-        findActiveItems,
-        completeItems,
-        registerUser
+    // Save a new task
+    public saveItem(item: TaskData): void {
+        const tasks = LocalStorageService.getAllTasks();
+        const newTask = { ...item, status: TaskFilters.Active, id: uuidv4() };
+        LocalStorageService.saveTasks([...tasks, newTask]);
     }
 
+    // Update an existing task
+    public updateItem(item: TaskData, id: string): void {
+        const tasks = LocalStorageService.getAllTasks();
+        const updatedTasks = tasks.map(task => (task.id === id ? { ...item, id } : task));
+        LocalStorageService.saveTasks(updatedTasks);
+    }
+
+    // Mark tasks as deleted
+    public deleteItems(ids: string[]): void {
+        const tasks = LocalStorageService.getAllTasks();
+        const updatedTasks = tasks.map(task =>
+            ids.includes(task.id) ? { ...task, status: TaskFilters.Deleted } : task
+        );
+        LocalStorageService.saveTasks(updatedTasks);
+    }
+
+    // Mark tasks as completed
+    public completeItems(ids: string[]): void {
+        const tasks = LocalStorageService.getAllTasks();
+        const updatedTasks = tasks.map(task =>
+            ids.includes(task.id) ? { ...task, status: TaskFilters.Completed } : task
+        );
+        LocalStorageService.saveTasks(updatedTasks);
+    }
+
+    // Find a task by ID
+    public findItemById(id: string): TaskData | undefined {
+        const tasks = LocalStorageService.getAllTasks();
+        return tasks.find(task => task.id === id);
+    }
+
+    // Find tasks by status
+    public findItemByStatus(status: string): TaskData[] {
+        const tasks = LocalStorageService.getAllTasks();
+        return status === TaskFilters.All ? tasks : tasks.filter(task => task.status === status);
+    }
+
+    // Find tasks by task name
+    public findItemsByTask(task: string): TaskData[] {
+        const tasks = LocalStorageService.getAllTasks();
+        return task === TaskFilters.All
+            ? tasks
+            : tasks.filter(t => t.task && t.task.includes(task));
+    }
+
+    // Find all tasks
+    public findAll(): TaskData[] {
+        return LocalStorageService.getAllTasks();
+    }
+
+    // Find active tasks
+    public findActiveItems(): TaskData[] {
+        return this.findItemByStatus(TaskFilters.Active);
+    }
+
+    // Find deleted tasks
+    public findDeletedItems(): TaskData[] {
+        return this.findItemByStatus(TaskFilters.Deleted);
+    }
+
+    // Find completed tasks
+    public findCompletedItems(): TaskData[] {
+        return this.findItemByStatus(TaskFilters.Completed);
+    }
 }
 
-export default LocalStorageService();
-
+// Export an instance of the service
+const localStorageService = new LocalStorageService();
+export default localStorageService;

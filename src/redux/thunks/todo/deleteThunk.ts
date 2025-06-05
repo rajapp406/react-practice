@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { promisify } from "../../../util/common.util";
-import localStorageService from "../../../exercises/todo/services/localStorageService";
+import {localStorageService} from "../../../exercises/todo/services";
  
 
 export const deleteTodoByTaskThunk = createAsyncThunk(
@@ -12,7 +12,6 @@ export const deleteTodoByTaskThunk = createAsyncThunk(
     },
     {
         condition: (id, { getState, extra }) => {
-            console.log(extra, getState(), id)
             return true;
         }
     }

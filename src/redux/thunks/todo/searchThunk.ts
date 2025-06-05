@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import localStorageService from "../../../exercises/todo/services/localStorageService";
+import {localStorageService} from "../../../exercises/todo/services";
 import { promisify } from "../../../util/common.util";
 
 
@@ -11,7 +11,6 @@ export const searchTodoByTaskThunk = createAsyncThunk(
     },
     {
         condition: (id, { getState, extra }) => {
-            console.log(extra)
             return true;
         }
     }

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../../redux/store';
-import { create } from '../../../../redux/slices/todoDataSlice';
-import { TButton } from '../../../../elements/Button';
-import { InputBox } from '../../../../elements/Input';
+import { RootState } from '../redux/store';
+import { create } from '../redux/slices/todoDataSlice';
+import { TButton } from '../elements/Button';
+import { InputBox } from '../elements/Input';
 interface FormData {
     task: string
 }

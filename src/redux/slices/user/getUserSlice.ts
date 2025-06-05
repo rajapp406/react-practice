@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getAllUsersByThunk } from '../../thunks/users/getAllUsersThunk';
-import { Users } from '../../../exercises/users/models/users';
+import { Users } from '../../../models/users';
 import { getUserThunk } from '../../thunks/users/getUserThunk';
 import { loginUserThunk } from '../../thunks/users/loginUserThunk';
 
@@ -9,7 +9,6 @@ const getUserSlice = createSlice({
     initialState: { error: null, data: [] as Users[], filter: '' } as any,
     reducers: {
         filter: (state, payload) => {
-            console.log(state, payload);
             return { ...state, ...payload }
         }
     },
@@ -18,7 +17,7 @@ const getUserSlice = createSlice({
             .addCase(
                 getUserThunk.pending,
                 (state, action) => {
-                    console.log(state, action, 'pending');
+                    
                     return
                 }
             )
@@ -32,7 +31,7 @@ const getUserSlice = createSlice({
             ).addCase(
                 getUserThunk.rejected,
                 (state, action) => {
-                    console.log(state, action), 'rejected';
+                    
                     state.error = action.error as any
                     return
                 }
@@ -40,7 +39,7 @@ const getUserSlice = createSlice({
             .addCase(
                 loginUserThunk.pending,
                 (state, action) => {
-                    console.log(state, action, 'pending');
+                    
                     return
                 }
             )
@@ -54,7 +53,7 @@ const getUserSlice = createSlice({
             ).addCase(
                 loginUserThunk.rejected,
                 (state, action) => {
-                    console.log(state, action), 'rejected';
+                    
                     state.error = action.error as any
                     return
                 }

@@ -7,7 +7,6 @@ export const TestMemo = () => {
 const fn = useMemo(() => [1,2],[]);
 //const fn = () => [1,2];
 const onClick = useCallback(() => {
-    console.log('hello!')
 }, [text]);
 /*const onClick = () => {
     console.log('hello!')

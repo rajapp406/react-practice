@@ -11,7 +11,6 @@ export default function Filters({onChange, selected =  Object.keys(TaskFilters)[
     return (
         <>
             <TSelect label="Filter" onChange={(e: any)=> {
-                console.log(e.target.value)
                 return onChange(e.target.value)
             }}  defaultValue={TaskFilters.All} options={getOptionsFromEnum(TaskFilters)}>
           

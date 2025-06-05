@@ -7,7 +7,6 @@ import React from "react";
 import { TContainer } from "../../../../elements/Container";
 export function TaskDetailsContainer() {
     const data = useSelector((state: RootState) =>{
-        console.log(state.todoSearch.data, groupBy(state.todoSearch.data, 'status'))
         return groupBy(state.todoSearch.data, 'status');
     });
 

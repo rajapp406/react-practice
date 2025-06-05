@@ -1,19 +1,73 @@
+import { Box, Container, Link, List, ListItem, ListItemText } from "@mui/material";
 import { NavLink } from "react-router";
 
 export function THeader() {
-    return (
-        <nav style={{ display: 'flex' }} className="nav-link">
-            <ul className="nav-menu" style={{ display: 'flex', padding: '5px', listStyle: 'none' }}>
-                <li className="nav-item"><NavLink to='dashboard'>Dashboard</NavLink></li>
-                <li className="nav-item">
-                    <NavLink to='todo'>Todo</NavLink>
-                </li>
-                <li className="nav-item"><NavLink to='aichat'>AI Chat</NavLink></li>
-                <li className="nav-item"><NavLink to='budget'>Budget</NavLink></li>
-                <li className="nav-item"><NavLink to='tictactoe'>Tic Toc Toe</NavLink></li>
-                <li className="nav-item"><NavLink to='users'>Users</NavLink></li>
+  return (
+    <Container sx={{display: "flex"}}>
+      <nav style={{ display: "flex" }}>
+        <Box sx={{ overflow: "auto", display: "flex" }}>
+          <List sx={{ overflow: "auto", display: "flex" }}>
+            <ListItem>
+              <ListItemText>
+                <NavLink to="dashboard">Dashboard</NavLink>
+              </ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText>
+                <NavLink to="aichat">AI Chat</NavLink>
+              </ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText>
+                <NavLink to="budget">Budget</NavLink>
+              </ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText>
+              <NavLink to="todo">Todo</NavLink>
+              </ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText>
+              <NavLink to="tictactoe">Tic Toc Toe</NavLink>
+              </ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText>
+              <NavLink to="users">Users</NavLink>
+              </ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText>
+              <NavLink to="contact">Contact</NavLink>
+              </ListItemText>
+            </ListItem>
+          </List>
+        </Box>
+      </nav>
+    </Container>
+  );
+}
 
-            </ul>
-        </nav>
-    )
+export function THeaderGeneric() {
+  return (
+    <Container sx={{display: "flex"}}>
+      <nav className="right-nav">
+        <Box>
+          <List sx={{ overflow: "auto", display: "flex" }}>
+            <ListItem>
+              <ListItemText>
+              <NavLink to="login">Login</NavLink>
+              </ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText>
+              <NavLink to="registration">Registration</NavLink>
+              </ListItemText>
+            </ListItem>
+          </List>
+        </Box>
+      </nav>
+    </Container>
+  );
 }

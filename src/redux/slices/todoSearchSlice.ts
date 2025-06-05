@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { searchTodoByTaskThunk } from "../thunks/searchThunk";
-import { getAllTodosByThunk } from "../thunks/allTodosThunk";
+import { searchTodoByTaskThunk } from "../thunks/todo/searchThunk";
+import { getAllTodosByThunk } from "../thunks/todo/allTodosThunk";
 
 const searchSlice = createSlice({
     name: 'todoSearch',
@@ -12,7 +12,6 @@ const searchSlice = createSlice({
     } as any,
     reducers: {
         search: (state, payload) => {
-            console.log(state, payload);
             return { ...state, ...payload };
         },
 
@@ -21,14 +20,14 @@ const searchSlice = createSlice({
         builder.addCase(
             searchTodoByTaskThunk.pending,
             (state, action) => {
-                console.log(state, action, 'pending');
+                
                 return
             }
         )
         .addCase(
             searchTodoByTaskThunk.fulfilled,
             (state, action) => {
-                console.log(state, action), 'fulfilled';
+                
                 state.data = [...action.payload] as any
                 state.searchQuery = action.meta.arg;
                 return
@@ -36,21 +35,21 @@ const searchSlice = createSlice({
         ).addCase(
             searchTodoByTaskThunk.rejected,
             (state, action) => {
-                console.log(state, action), 'rejected';
+                
                 state.error = action.error as any
                 return
             }
         ).addCase(
             getAllTodosByThunk.pending,
             (state, action) => {
-                console.log(state, action, 'pending');
+                
                 return
             }
         )
         .addCase(
             getAllTodosByThunk.fulfilled,
             (state, action) => {
-                console.log(state, action), 'fulfilled';
+                
                 state.data = [...action.payload] as any
                 state.searchQuery = action.meta.arg;
                 return
@@ -58,7 +57,7 @@ const searchSlice = createSlice({
         ).addCase(
             getAllTodosByThunk.rejected,
             (state, action) => {
-                console.log(state, action), 'rejected';
+                
                 state.error = action.error as any
                 return
             }
